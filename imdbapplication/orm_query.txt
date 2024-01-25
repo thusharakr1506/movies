@@ -1,0 +1,67 @@
+from myapp.models import Movie
+
+====orm query for creating a resourse===
+
+Movie.objects.create(name="ozler",language="malayalam",run_time="120",genre="action",director="midhun manuel",year="2024",actors="jayaram")
+Movie.objects.create(name="captain miller",language="tamil",run_time="160",genre="action",director="arun",year="2024",actors="dhanush")
+Movie.objects.create(name="neru",language="malayalam",run_time="120",genre="thriller",director="jeethu joseph",year="2023",actors="mohanlal")
+Movie.objects.create(name="hanuman",language="telungu",run_time="180",genre="adventure",director="prasanth varma",year="2024",actors="mohanlal")
+Movie.objects.create(name="ayalan",language="tamil",run_time="120",genre="comedy",director="ravi kumar",year="2024",actors="sivakarthikeyan")
+Movie.objects.create(name="migration",language="english",run_time="120",genre="animation",director="benjamin",year="2023",actors="elizabeth")
+
+===orm query for fetching all records===
+
+qs=Movie.objects.all()
+
+====orm query for fetching specific field====
+
+qs=Movie.objects.get(id=2)
+
+====orm query for filtering objects====
+
+qs=Movie.objects.filter(language="malayalam")
+
+
+===orm query for updating movie object====
+
+Movie.objects.filter(id=1).update(genre="action")
+
+Movie.objects.filter(id=4).update(actors="teja sajja")
+
+===orm query for deleting movie object====
+
+Movie.objects.filter(id=1).delete()
+
+====field lookup===
+
+    ==query for filter movie released bfor 2024==
+
+qs=Movie.objects.filter(year__lt=2024)
+<   __lt
+<=  __lte
+>   __gt
+>=  __gte
+
+    ==query for filter movie released after 2023==
+
+qs=Movie.objects.filter(year__gt=2023)
+
+    =====query for filter movie having runtime greater than 120====
+
+qs=Movie.objects.filter(run_time__gt=120)
+
+    =====query for filter movie having run_time less than equal to 160===
+
+qs=Movie.objects.filter(run_time__lte=160)
+
+
+===query for excluding an object===
+
+qs=Movie.objects.exclude(language="english")
+
+====orm query for listing all genre====
+
+qs=Movie.objects.all().values_list("genre",flat=True).distinct()
+
+
+
